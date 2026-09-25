@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Sora, Syne } from "next/font/google";
 import { Providers } from "@/components/Providers";
 import { site } from "@/lib/data";
+import { getMetadataBase } from "@/lib/site-url";
 import "./globals.css";
 
 const sora = Sora({
@@ -17,14 +18,8 @@ const syne = Syne({
   weight: ["500", "600", "700", "800"],
 });
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "http://localhost:3000");
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: getMetadataBase(),
   title: {
     default: `${site.name} — ${site.title}`,
     template: `%s — ${site.name}`,
